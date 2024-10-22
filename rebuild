@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+cp configuration.nix /etc/nixos/configuration.nix
+if [ -z "$1" ]; then
+	arg=switch
+else
+	arg="$1"
+fi
+nixos-rebuild "${arg}"
