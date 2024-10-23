@@ -62,6 +62,12 @@
   virtualisation.libvirtd.enable = true;
   networking.firewall.trustedInterfaces = [ "lxdbr0" ];
 
+  # k3s
+  services.k3s = {
+    enable = true;
+    extraFlags = "--disable traefik --default-local-storage-path /storage/k8s";
+  };
+
   system.stateVersion = "24.05";
 
 }
