@@ -68,6 +68,9 @@
     extraFlags = "--disable traefik --default-local-storage-path /storage/k8s";
   };
 
+  # Metrics
+  services.prometheus.exporters.node.enable = true;
+
   system.stateVersion = "24.05";
 
 }
