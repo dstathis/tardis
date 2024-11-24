@@ -69,7 +69,10 @@
   };
 
   # Metrics
-  services.prometheus.exporters.node.enable = true;
+  services.prometheus.exporters.node = {
+    enable = true;
+    extraFlags = [ "--collector.filesystem.mount-points-exclude=\"^/(dev|proc|run/credentials/.+|sys|var/lib/docker/.+|var/lib/containers/storage/.+|var/lib/kubelet/.+|run/user/.+)($|/)\"" ];
+  };
 
   system.stateVersion = "24.05";
 
