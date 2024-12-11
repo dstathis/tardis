@@ -18,13 +18,18 @@
   networking = {
     hostName = "tardis";
     interfaces = {
-      enp5s0.ipv4.addresses = [{
+      br0.ipv4.addresses = [{
         address = "192.168.1.52";
         prefixLength = 24;
       }];
     };
     defaultGateway = "192.168.1.1";
     nameservers = [ "192.168.1.1" ];
+    bridges = {
+      br0 = {
+        interfaces = [ "enp5s0" ];
+      };
+    };
   };
 
   # Users
