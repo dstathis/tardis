@@ -27,7 +27,7 @@
     nameservers = [ "192.168.1.1" ];
     bridges = {
       br0 = {
-        interfaces = [ "enp5s0" ];
+        interfaces = [ "enp6s0" ];
       };
     };
   };
