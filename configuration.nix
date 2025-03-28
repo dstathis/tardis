@@ -70,7 +70,7 @@
   # k3s
   services.k3s = {
     enable = true;
-    extraFlags = "--disable traefik --default-local-storage-path /storage/k8s";
+    extraFlags = "--disable traefik --disable servicelb --default-local-storage-path /storage/k8s";
   };
 
   # Metrics
