@@ -79,6 +79,32 @@
     extraFlags = [ "--collector.filesystem.mount-points-exclude=\"^/(dev|proc|run/credentials/.+|sys|var/lib/docker/.+|var/lib/containers/storage/.+|var/lib/kubelet/.+|run/user/.+|run/k3s/containerd/.+)($|/)\"" ];
   };
 
+  # Logs
+  services.promtail = {
+    enable = true;
+    configuration = {
+      server = {
+        disable = true;
+      };
+      positions = {
+        filename = "/tmp/positions.yaml";
+      };
+      clients = [{
+        url = "http://loki-coordinator/loki/api/v1/push";
+      }];
+      scrape_configs = [{
+        job_name = "pods";
+        static_configs = [{
+          targets = [ "localhost" ];
+          labels = {
+            job = "pods";
+            __path__ = "/var/log/pods/**.log";
+          };
+        }];
+      }];
+    };
+  };
+
   system.stateVersion = "24.05";
 
 }
