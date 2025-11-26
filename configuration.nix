@@ -35,7 +35,7 @@
   # Users
   users.users.dylan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "lxd" ];
+    extraGroups = [ "wheel" "incus-admin"];
   };
   security.sudo.wheelNeedsPassword = false;
 
@@ -62,10 +62,16 @@
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes";
 
-  # lxd
-  virtualisation.lxd.enable = true;
-  virtualisation.libvirtd.enable = true;
+  # incus
+  virtualisation.incus = {
+    enable = true;
+    package = pkgs.incus-lts;
+  };
+  networking.nftables.enable = true;
   networking.firewall.trustedInterfaces = [ "lxdbr0" ];
+
+  # libvirtd
+  virtualisation.libvirtd.enable = true;
 
   # k3s
   services.k3s = {
